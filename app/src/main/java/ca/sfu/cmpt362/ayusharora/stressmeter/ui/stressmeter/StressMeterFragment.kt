@@ -28,7 +28,7 @@ class StressMeterFragment : Fragment() {
         _binding = FragmentStressMeterBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
+        val textView: TextView = binding.stressmeterTextview
         stressMeterViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
