@@ -1,4 +1,4 @@
-package ca.sfu.cmpt362.ayusharora.stressmeter.ui.home
+package ca.sfu.cmpt362.ayusharora.stressmeter.ui.results
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentHomeBinding
+import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentResultsBinding
 
-class HomeFragment : Fragment() {
+class ResultsFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentResultsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val resultsViewModel =
+            ViewModelProvider(this).get(ResultsViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentResultsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textGallery
+        resultsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
