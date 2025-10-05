@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class StressMeterViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is StressMeter GridView Fragment"
+        value = "Touch the image that best captures how stressed you feel right now"
     }
     val text: LiveData<String> = _text
 }

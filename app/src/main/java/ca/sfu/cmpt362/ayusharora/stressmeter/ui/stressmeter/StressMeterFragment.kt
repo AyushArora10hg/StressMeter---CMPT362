@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import ca.sfu.cmpt362.ayusharora.stressmeter.R
 import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentStressMeterBinding
 
 class StressMeterFragment : Fragment() {
@@ -32,6 +34,13 @@ class StressMeterFragment : Fragment() {
         stressMeterViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        val gridView : GridView = binding.stressmeterGridview
+        val typedArray = resources.obtainTypedArray(R.array.images)
+        val images = IntArray(typedArray.length()) { i -> typedArray.getResourceId(i, 0) }
+        typedArray.recycle()
+        val imageAdapter = StressMeterImageAdapter(requireContext(), images)
+        gridView.adapter = imageAdapter
         return root
     }
 
