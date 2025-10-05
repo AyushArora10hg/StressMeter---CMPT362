@@ -1,13 +1,13 @@
-package ca.sfu.cmpt362.ayusharora.stressmeter.ui.results
+package ca.sfu.cmpt362.ayusharora.stressmeter.imagerequest
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ResultsViewModel : ViewModel() {
+class ImageRequest : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Results Fragment"
+        value = "Touch the image that best captures how stressed you feel right now"
     }
     val text: LiveData<String> = _text
 }

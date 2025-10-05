@@ -1,4 +1,4 @@
-package ca.sfu.cmpt362.ayusharora.stressmeter.ui.stressmeter
+package ca.sfu.cmpt362.ayusharora.stressmeter.imagerequest
 
 import android.content.Context
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 
-class StressMeterImageAdapter(private val context: Context, private val images: IntArray) : BaseAdapter() {
+class ImageAdapter(private val context: Context, private val images: IntArray) : BaseAdapter() {
     override fun getCount(): Int {
         return images.size
     }

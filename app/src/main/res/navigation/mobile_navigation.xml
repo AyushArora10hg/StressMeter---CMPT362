@@ -7,14 +7,14 @@
 
     <fragment
         android:id="@+id/nav_stress_meter"
-        android:name="ca.sfu.cmpt362.ayusharora.stressmeter.ui.stressmeter.StressMeterFragment"
+        android:name="ca.sfu.cmpt362.ayusharora.stressmeter.imagerequest.ImageRequestFragment"
         android:label="@string/menu_stress_meter"
-        tools:layout="@layout/fragment_stress_meter" />
+        tools:layout="@layout/fragment_image_request" />
 
     <fragment
         android:id="@+id/nav_results"
-        android:name="ca.sfu.cmpt362.ayusharora.stressmeter.ui.results.ResultsFragment"
-        android:label="@string/menu_results"
-        tools:layout="@layout/fragment_results" />
+        android:name="ca.sfu.cmpt362.ayusharora.stressmeter.visualization.VisualizationFragment"
+        android:label="@string/menu_stress_meter"
+        tools:layout="@layout/fragment_visualization" />
 
 </navigation>

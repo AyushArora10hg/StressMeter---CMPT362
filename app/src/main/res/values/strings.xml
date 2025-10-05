@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">StressMeterAyush</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="menu_stress_meter">Stress Meter</string>
     <string name="menu_results">Results</string>
     <string name="button_more_images">MORE IMAGES</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="button_submit">SUBMIT</string>
 </resources>

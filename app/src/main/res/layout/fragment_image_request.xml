@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.stressmeter.StressMeterFragment">
+    tools:context=".imagerequest.ImageRequestFragment">
 
     <TextView
-        android:id="@+id/stressmeter_textview"
+        android:id="@+id/image_request_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -18,8 +18,8 @@
         android:layout_alignParentTop="true" />
 
     <GridView
-        android:id="@+id/stressmeter_gridview"
-        android:layout_below="@+id/stressmeter_textview"
+        android:id="@+id/image_request_gridview"
+        android:layout_below="@+id/image_request_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

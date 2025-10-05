@@ -1,4 +1,4 @@
-package ca.sfu.cmpt362.ayusharora.stressmeter.ui.results
+package ca.sfu.cmpt362.ayusharora.stressmeter.visualization
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentResultsBinding
+import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentVisualizationBinding
 
-class ResultsFragment : Fragment() {
+class VisualizationFragment : Fragment() {
 
-    private var _binding: FragmentResultsBinding? = null
+    private var _binding: FragmentVisualizationBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class ResultsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val resultsViewModel =
-            ViewModelProvider(this).get(ResultsViewModel::class.java)
+        val visualizationViewModel =
+            ViewModelProvider(this).get(VisualizationViewModel::class.java)
 
-        _binding = FragmentResultsBinding.inflate(inflater, container, false)
+        _binding = FragmentVisualizationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.resultsTextview
-        resultsViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.visualizationTextview
+        visualizationViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

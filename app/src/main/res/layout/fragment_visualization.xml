@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.results.ResultsFragment">
+    tools:context=".visualization.VisualizationFragment">
 
     <TextView
-        android:id="@+id/results_textview"
+        android:id="@+id/visualization_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
