@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".imagerequest.ImageRequestFragment">
 
     <TextView
@@ -14,21 +15,24 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:textAlignment="center"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_alignParentTop="true" />
 
     <GridView
         android:id="@+id/image_request_gridview"
         android:layout_below="@+id/image_request_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_above="@+id/image_request_button_more_images"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
-        android:numColumns="4"/>
+        android:numColumns="4"
+        android:verticalSpacing="8dp"
+        android:horizontalSpacing="8dp" />
 
     <Button
-        android:id="@+id/start_button_start"
+        android:id="@+id/image_request_button_more_images"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"

@@ -1,22 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="images">
-        <item>@drawable/ic_menu_stress_meter</item>
-        <item>@drawable/ic_menu_results</item>
-        <item>@drawable/ic_menu_stress_meter</item>
-        <item>@drawable/ic_menu_results</item>
-        <item>@drawable/ic_menu_stress_meter</item>
-        <item>@drawable/ic_menu_results</item>
-        <item>@drawable/ic_menu_stress_meter</item>
-        <item>@drawable/ic_menu_results</item>
-        <item>@drawable/ic_menu_stress_meter</item>
-        <item>@drawable/ic_menu_results</item>
-        <item>@drawable/ic_menu_stress_meter</item>
-        <item>@drawable/ic_menu_results</item>
-        <item>@drawable/ic_menu_stress_meter</item>
-        <item>@drawable/ic_menu_results</item>
-        <item>@drawable/ic_menu_stress_meter</item>
-        <item>@drawable/ic_menu_results</item>
+    <array name="images_1">
+        <item>@drawable/set1_0</item>
+        <item>@drawable/set1_1</item>
+        <item>@drawable/set1_2</item>
+        <item>@drawable/set1_3</item>
+        <item>@drawable/set1_4</item>
+        <item>@drawable/set1_5</item>
+        <item>@drawable/set1_6</item>
+        <item>@drawable/set1_7</item>
+        <item>@drawable/set1_8</item>
+        <item>@drawable/set1_9</item>
+        <item>@drawable/set1_10</item>
+        <item>@drawable/set1_11</item>
+        <item>@drawable/set1_12</item>
+        <item>@drawable/set1_13</item>
+        <item>@drawable/set1_14</item>
+        <item>@drawable/set1_15</item>
+    </array>
 
+    <array name="images_2">
+        <item>@drawable/set2_0</item>
+        <item>@drawable/set2_1</item>
+        <item>@drawable/set2_2</item>
+        <item>@drawable/set2_3</item>
+        <item>@drawable/set2_4</item>
+        <item>@drawable/set2_5</item>
+        <item>@drawable/set2_6</item>
+        <item>@drawable/set2_7</item>
+        <item>@drawable/set2_8</item>
+        <item>@drawable/set2_9</item>
+        <item>@drawable/set2_10</item>
+        <item>@drawable/set2_11</item>
+        <item>@drawable/set2_12</item>
+        <item>@drawable/set2_13</item>
+        <item>@drawable/set2_14</item>
+        <item>@drawable/set2_15</item>
+    </array>
+
+    <array name="images_3">
+        <item>@drawable/set3_0</item>
+        <item>@drawable/set3_1</item>
+        <item>@drawable/set3_2</item>
+        <item>@drawable/set3_3</item>
+        <item>@drawable/set3_4</item>
+        <item>@drawable/set3_5</item>
+        <item>@drawable/set3_6</item>
+        <item>@drawable/set3_7</item>
+        <item>@drawable/set3_8</item>
+        <item>@drawable/set3_9</item>
+        <item>@drawable/set3_10</item>
+        <item>@drawable/set3_11</item>
+        <item>@drawable/set3_12</item>
+        <item>@drawable/set3_13</item>
+        <item>@drawable/set3_14</item>
+        <item>@drawable/set3_15</item>
     </array>
 </resources>

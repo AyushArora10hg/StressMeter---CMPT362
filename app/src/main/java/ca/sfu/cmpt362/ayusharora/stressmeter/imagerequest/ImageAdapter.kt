@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 
-class ImageAdapter(private val context: Context, private val images: IntArray) : BaseAdapter() {
+class ImageAdapter(private val context: Context, private var images: IntArray) : BaseAdapter() {
     override fun getCount(): Int {
         return images.size
     }
@@ -23,7 +23,13 @@ class ImageAdapter(private val context: Context, private val images: IntArray) :
         val imageView: ImageView = convertView as? ImageView ?: ImageView(context)
         imageView.setImageResource(images[position])
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-        imageView.layoutParams = ViewGroup.LayoutParams(200, 200)
+        val size = parent!!.width/4
+        imageView.layoutParams = ViewGroup.LayoutParams(size, size)
         return imageView
+    }
+
+    fun updateImages(newImages: IntArray) {
+        images = newImages
+        notifyDataSetChanged()
     }
 }

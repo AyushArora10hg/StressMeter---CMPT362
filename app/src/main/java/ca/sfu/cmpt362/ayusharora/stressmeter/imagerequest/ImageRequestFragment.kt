@@ -1,6 +1,7 @@
 package ca.sfu.cmpt362.ayusharora.stressmeter.imagerequest
 
 import android.content.Intent
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,32 +17,34 @@ import ca.sfu.cmpt362.ayusharora.stressmeter.imageresponse.ImageResponse
 class ImageRequestFragment : Fragment() {
 
     private var _binding: FragmentImageRequestBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var displayArray : TypedArray
+    private  var displayArrayNumber : Int = 1
+    private lateinit var gridView : GridView
+    private lateinit var imageAdapter: ImageAdapter
+    private lateinit var images: IntArray
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val imageRequest =
-            ViewModelProvider(this).get(ImageRequest::class.java)
+        val imageRequestViewModel =
+            ViewModelProvider(this).get(ImageRequestViewModel::class.java)
 
         _binding = FragmentImageRequestBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.imageRequestTextview
-        imageRequest.text.observe(viewLifecycleOwner) {
+        imageRequestViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
 
-        val gridView : GridView = binding.imageRequestGridview
-        val typedArray = resources.obtainTypedArray(R.array.images)
-        val images = IntArray(typedArray.length()) { i -> typedArray.getResourceId(i, 0) }
-        typedArray.recycle()
-        val imageAdapter = ImageAdapter(requireContext(), images)
+        gridView = binding.imageRequestGridview
+        displayArray = resources.obtainTypedArray(R.array.images_1)
+        images = IntArray(displayArray.length()) { i -> displayArray.getResourceId(i, 0) }
+        displayArray.recycle()
+        imageAdapter = ImageAdapter(requireContext(), images)
         gridView.adapter = imageAdapter
 
         gridView.setOnItemClickListener { parent, view, position, id ->
@@ -49,6 +52,29 @@ class ImageRequestFragment : Fragment() {
             intent.putExtra("selectedImage", images[position])
             startActivity(intent)
         }
+
+        val button = binding.imageRequestButtonMoreImages
+            button.setOnClickListener {
+                when (displayArrayNumber){
+                    1->{
+                        displayArray = resources.obtainTypedArray(R.array.images_2)
+                        displayArrayNumber = 2
+                    }
+                    2->{
+                        displayArray = resources.obtainTypedArray(R.array.images_3)
+                        displayArrayNumber = 3
+                    }
+                    3->{
+                        displayArray = resources.obtainTypedArray(R.array.images_1)
+                        displayArrayNumber = 1
+                    }
+                }
+
+                images = IntArray(displayArray.length()) { i -> displayArray.getResourceId(i, 0) }
+                displayArray.recycle()
+                imageAdapter.updateImages(images)
+            }
+
         return root
     }
 
