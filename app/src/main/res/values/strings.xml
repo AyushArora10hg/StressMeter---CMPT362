@@ -6,4 +6,5 @@
     <string name="button_more_images">MORE IMAGES</string>
     <string name="button_cancel">CANCEL</string>
     <string name="button_submit">SUBMIT</string>
+    <string name="image_request_text">Touch the image that best captures how stressed you feel right now</string>
 </resources>
