@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TableLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -12,26 +13,15 @@ import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentVisualizationBi
 class VisualizationFragment : Fragment() {
 
     private var _binding: FragmentVisualizationBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var summaryTable: TableLayout
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val visualizationViewModel =
-            ViewModelProvider(this).get(VisualizationViewModel::class.java)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         _binding = FragmentVisualizationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.visualizationTextview
-        visualizationViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        summaryTable = binding.visualizationTablelayout
         return root
     }
 

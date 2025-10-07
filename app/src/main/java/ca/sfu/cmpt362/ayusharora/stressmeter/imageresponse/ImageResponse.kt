@@ -4,15 +4,17 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.ActivityImageResponseBinding
+import java.io.File
+import java.io.FileWriter
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ImageResponse: AppCompatActivity() {
-
     private lateinit var binding: ActivityImageResponseBinding
-    private lateinit var submitButton: Button
-    private lateinit var cancelButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,26 +28,40 @@ class ImageResponse: AppCompatActivity() {
     }
 
     private fun displayImage(){
+
         val imageView: ImageView = binding.imageResponseImageview
-
-        val imageId = intent.getIntExtra("selectedImage", 0)
-
-        if (imageId != 0) {
-            imageView.setImageResource(imageId)
+        val imageToShow = intent.getIntExtra("selectedImage", 0)
+        if (imageToShow != 0) {
+            imageView.setImageResource(imageToShow)
         }
     }
-
     private fun handleButtonClicks(){
 
-        submitButton = binding.imageResponseButtonSubmit
+        val submitButton: Button = binding.imageResponseButtonSubmit
         submitButton.setOnClickListener{
-            Toast.makeText(this, "Response recorded!", Toast.LENGTH_SHORT).show()
+            writeToCSV()
             finishAffinity()
         }
 
-        cancelButton = binding.imageResponseButtonCancel
+        val cancelButton : Button = binding.imageResponseButtonCancel
         cancelButton.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun writeToCSV(){
+
+        val file = File(this.filesDir, "stress_level_data.csv")
+        val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
+        val stressLevel = intent.getIntExtra("selectedImageID",-1)
+        try {
+            val writer = FileWriter(file,true)
+            writer.write("$timestamp, $stressLevel\n")
+            writer.flush()
+            writer.close()
+
+        } catch (_: IOException){
+            println("File not found")
         }
     }
 }

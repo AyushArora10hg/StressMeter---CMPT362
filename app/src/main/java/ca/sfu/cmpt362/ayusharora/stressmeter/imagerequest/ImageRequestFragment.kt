@@ -43,8 +43,9 @@ class ImageRequestFragment : Fragment() {
         imageAdapter = ImageAdapter(requireContext(), imagesToShow)
         gridView.adapter = imageAdapter
         gridView.setOnItemClickListener { parent, view, position, id ->
-            val intent = Intent(requireContext(), ImageResponse::class.java)
+            val intent = Intent(requireActivity(), ImageResponse::class.java)
             intent.putExtra("selectedImage", imagesToShow[position])
+            intent.putExtra("selectedImageID",position)
             startActivity(intent)
         }
         imageResourceArray.recycle()

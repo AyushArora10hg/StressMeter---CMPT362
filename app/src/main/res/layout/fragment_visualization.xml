@@ -1,22 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".visualization.VisualizationFragment">
 
-    <TextView
-        android:id="@+id/visualization_textview"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        tools:context=".visualization.VisualizationFragment">
+
+        <TextView
+            android:id="@+id/graph_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/visualization_graph_title"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/yapping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Assume\na\nGraph\n(at this very spot)"
+            android:layout_below="@+id/graph_text"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/visualization_table_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/visualization_table_title"
+            android:layout_below="@+id/yapping"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <TableLayout
+            android:id="@+id/visualization_tablelayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/visualization_table_title"
+            android:layout_marginEnd="10dp"
+            android:showDividers="middle"
+            android:layout_marginStart="10dp">
+
+            <TableRow
+                android:background="@color/gray"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/row_timestamp"
+                    android:textStyle="bold"
+                    android:background="@color/gray" />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/row_stress"
+                    android:textStyle="bold"
+                    android:background="@color/gray" />
+
+            </TableRow>
+
+        </TableLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
