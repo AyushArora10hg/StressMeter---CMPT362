@@ -16,6 +16,24 @@ import ca.sfu.cmpt362.ayusharora.stressmeter.imageresponse.ImageResponse
 
 class ImageRequestFragment : Fragment() {
 
+    private val images1 = intArrayOf(
+        R.drawable.set1_0, R.drawable.set1_1, R.drawable.set1_2, R.drawable.set1_3,
+        R.drawable.set1_4, R.drawable.set1_5, R.drawable.set1_6, R.drawable.set1_7,
+        R.drawable.set1_8, R.drawable.set1_9, R.drawable.set1_10, R.drawable.set1_11,
+        R.drawable.set1_12, R.drawable.set1_13, R.drawable.set1_14, R.drawable.set1_15
+    )
+    private val images2 = intArrayOf(
+        R.drawable.set2_0, R.drawable.set2_1, R.drawable.set2_2, R.drawable.set2_3,
+        R.drawable.set2_4, R.drawable.set2_5, R.drawable.set2_6, R.drawable.set2_7,
+        R.drawable.set2_8, R.drawable.set2_9, R.drawable.set2_10, R.drawable.set2_11,
+        R.drawable.set2_12, R.drawable.set2_13, R.drawable.set2_14, R.drawable.set2_15
+    )
+    private val images3 = intArrayOf(
+        R.drawable.set3_0, R.drawable.set3_1, R.drawable.set3_2, R.drawable.set3_3,
+        R.drawable.set3_4, R.drawable.set3_5, R.drawable.set3_6, R.drawable.set3_7,
+        R.drawable.set3_8, R.drawable.set3_9, R.drawable.set3_10, R.drawable.set3_11,
+        R.drawable.set3_12, R.drawable.set3_13, R.drawable.set3_14, R.drawable.set3_15
+    )
     private var _binding: FragmentImageRequestBinding? = null
     private val binding get() = _binding!!
     private lateinit var imageAdapter: ImageAdapter
@@ -32,14 +50,14 @@ class ImageRequestFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+
         super.onDestroyView()
         _binding = null
     }
     private fun setupGridView(){
 
         val gridView: GridView = binding.imageRequestGridview
-        val imageResourceArray = resources.obtainTypedArray(R.array.images_1)
-        imagesToShow = IntArray(imageResourceArray.length()) { i -> imageResourceArray.getResourceId(i, 0) }
+        imagesToShow = images1
         imageAdapter = ImageAdapter(requireContext(), imagesToShow)
         gridView.adapter = imageAdapter
         gridView.setOnItemClickListener { parent, view, position, id ->
@@ -48,32 +66,26 @@ class ImageRequestFragment : Fragment() {
             intent.putExtra("selectedImageID",position)
             startActivity(intent)
         }
-        imageResourceArray.recycle()
     }
     private fun handleButtonClick () {
 
         val button = binding.imageRequestButtonMoreImages
         var displayArrayNumber = 1
-        var imageResourceArray: TypedArray? = null
         button.setOnClickListener {
             when (displayArrayNumber){
                 1->{
-                    imageResourceArray = resources.obtainTypedArray(R.array.images_2)
+                    imagesToShow =  images2
                     displayArrayNumber = 2
                 }
                 2->{
-                    imageResourceArray = resources.obtainTypedArray(R.array.images_3)
+                    imagesToShow =  images3
                     displayArrayNumber = 3
                 }
                 3->{
-                    imageResourceArray = resources.obtainTypedArray(R.array.images_1)
+                    imagesToShow =  images1
                     displayArrayNumber = 1
                 }
             }
-
-            imagesToShow = IntArray(imageResourceArray?.length() ?: 0 ) { i -> imageResourceArray?.getResourceId(i, 0)
-                ?: 0}
-            imageResourceArray?.recycle()
             imageAdapter.updateImages(imagesToShow)
         }
     }

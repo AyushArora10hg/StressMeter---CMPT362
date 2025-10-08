@@ -12,6 +12,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import ca.sfu.cmpt362.ayusharora.stressmeter.R
 import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentVisualizationBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class VisualizationFragment : Fragment() {
@@ -24,16 +28,18 @@ class VisualizationFragment : Fragment() {
         _binding = FragmentVisualizationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        readFromCSV()
+        CoroutineScope(Dispatchers.IO).launch{
+            readFromCSV()
+        }
         return root
     }
 
     override fun onDestroyView() {
+
         super.onDestroyView()
         _binding = null
     }
-
-    private fun readFromCSV(){
+    private suspend fun readFromCSV(){
 
         val file = File(requireContext().filesDir, "stress_level_data.csv")
         if (file.exists()){
@@ -43,14 +49,16 @@ class VisualizationFragment : Fragment() {
                 val parts = line.split(",")
                 val timestamp = parts[0]
                 val stressLevel = parts[1]
-                addToTable(timestamp, stressLevel)
+                withContext(Dispatchers.Main) {
+                    addToTable(timestamp, stressLevel)
+                }
             }
         }
     }
 
     private fun addToTable(timestamp: String, stressLevel: String){
 
-        var summaryTable: TableLayout = binding.visualizationTablelayout
+        val summaryTable: TableLayout = binding.visualizationTablelayout
         val newRow = TableRow(requireContext())
 
         val time = TextView(requireContext())
