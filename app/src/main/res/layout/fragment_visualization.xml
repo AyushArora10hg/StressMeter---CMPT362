@@ -32,7 +32,7 @@
             android:layout_marginEnd="10dp"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/visualization_table_title"
@@ -53,24 +53,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp">
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/cell_border">
 
-            <TableRow
-                android:background = "@color/gray">
+            <TableRow>
 
             <TextView
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/row_timestamp"
                 android:textStyle="bold"
-                android:padding="8dp" />
+                android:padding="4dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/row_stress"
                 android:textStyle="bold"
-                android:padding="8dp" />
+                android:padding="4dp"
+                android:textColor="@color/black"/>
             </TableRow>
         </TableLayout>
     </RelativeLayout>
