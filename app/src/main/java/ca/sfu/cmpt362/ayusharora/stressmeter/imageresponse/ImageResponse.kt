@@ -9,9 +9,6 @@ import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.ActivityImageResponseBi
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class ImageResponse: AppCompatActivity() {
     private lateinit var binding: ActivityImageResponseBinding
@@ -52,7 +49,7 @@ class ImageResponse: AppCompatActivity() {
     private fun writeToCSV(){
 
         val file = File(this.filesDir, "stress_level_data.csv")
-        val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
+        val timestamp = System.currentTimeMillis()
         val stressLevel = intent.getIntExtra("selectedImageID",-1)
         try {
             val writer = FileWriter(file,true)
