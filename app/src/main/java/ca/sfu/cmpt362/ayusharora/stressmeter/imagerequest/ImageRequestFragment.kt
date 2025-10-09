@@ -1,14 +1,13 @@
 package ca.sfu.cmpt362.ayusharora.stressmeter.imagerequest
 
-
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import ca.sfu.cmpt362.ayusharora.stressmeter.R
 import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentImageRequestBinding
 import ca.sfu.cmpt362.ayusharora.stressmeter.imageresponse.ImageResponse
@@ -35,19 +34,24 @@ class ImageRequestFragment : Fragment() {
     )
     private var _binding: FragmentImageRequestBinding? = null
     private val binding get() = _binding!!
+    private lateinit var imageRequestViewModel: ImageRequestViewModel
     private lateinit var imageAdapter: ImageAdapter
     private lateinit var imagesToShow: IntArray
-    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         _binding = FragmentImageRequestBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        imageRequestViewModel = ViewModelProvider(requireActivity())[ImageRequestViewModel::class.java]
+
+        imageRequestViewModel.currentImages.observe(viewLifecycleOwner) { images ->
+            imagesToShow = images
+            imageAdapter.updateImages(images)
+        }
+
         setupGridView()
         handleButtonClick()
-        loadSoundEffects()
-        mediaPlayer.start()
 
         return root
     }
@@ -56,25 +60,6 @@ class ImageRequestFragment : Fragment() {
 
         super.onDestroyView()
         _binding = null
-        mediaPlayer.stop()
-        mediaPlayer.release()
-    }
-
-    override fun onResume() {
-
-        super.onResume()
-        mediaPlayer.start()
-    }
-
-    override fun onPause() {
-
-        super.onPause()
-        mediaPlayer.pause()
-    }
-    private fun loadSoundEffects(){
-
-        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.harry_potter_theme_1)
-        mediaPlayer.isLooping = true
     }
     private fun setupGridView(){
 
@@ -108,7 +93,7 @@ class ImageRequestFragment : Fragment() {
                     displayArrayNumber = 1
                 }
             }
-            imageAdapter.updateImages(imagesToShow)
+            imageRequestViewModel.updateImages(imagesToShow)
         }
     }
 }
