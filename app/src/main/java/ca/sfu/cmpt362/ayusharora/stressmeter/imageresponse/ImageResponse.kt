@@ -18,7 +18,6 @@ class ImageResponse: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         binding = ActivityImageResponseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

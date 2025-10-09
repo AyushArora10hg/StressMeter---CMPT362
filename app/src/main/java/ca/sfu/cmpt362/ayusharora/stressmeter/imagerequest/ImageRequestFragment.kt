@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import ca.sfu.cmpt362.ayusharora.stressmeter.R
 import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentImageRequestBinding
 import ca.sfu.cmpt362.ayusharora.stressmeter.imageresponse.ImageResponse
-
 class ImageRequestFragment : Fragment() {
 
     private val images1 = intArrayOf(
