@@ -49,6 +49,8 @@ class ImageRequestFragment : Fragment() {
             imagesToShow = images
             imageAdapter.updateImages(images)
         }
+
+        loadMusic()
         setupGridView()
         handleButtonClick()
 
@@ -59,6 +61,16 @@ class ImageRequestFragment : Fragment() {
 
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        imageRequestViewModel.musicPlayer?.resume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        imageRequestViewModel.musicPlayer?.pause()
     }
     private fun setupGridView(){
 
@@ -71,6 +83,13 @@ class ImageRequestFragment : Fragment() {
             intent.putExtra("selectedImage", imagesToShow[position])
             intent.putExtra("selectedImageID",position)
             startActivity(intent)
+        }
+    }
+
+    private fun loadMusic(){
+        if (imageRequestViewModel.musicPlayer == null) {
+            imageRequestViewModel.musicPlayer = MyMusicPlayer(requireContext(), R.raw.harry_potter_theme_1)
+            imageRequestViewModel.musicPlayer?.start()
         }
     }
     private fun handleButtonClick () {
