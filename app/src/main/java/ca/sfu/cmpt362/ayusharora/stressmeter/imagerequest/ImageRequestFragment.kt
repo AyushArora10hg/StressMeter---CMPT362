@@ -1,19 +1,14 @@
 package ca.sfu.cmpt362.ayusharora.stressmeter.imagerequest
 
-import android.content.Context.VIBRATOR_SERVICE
+
 import android.content.Intent
-import android.content.res.TypedArray
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
-import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import ca.sfu.cmpt362.ayusharora.stressmeter.R
 import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentImageRequestBinding
 import ca.sfu.cmpt362.ayusharora.stressmeter.imageresponse.ImageResponse
@@ -49,11 +44,10 @@ class ImageRequestFragment : Fragment() {
         _binding = FragmentImageRequestBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        mediaPlayer.start()
-
         setupGridView()
         handleButtonClick()
         loadSoundEffects()
+        mediaPlayer.start()
 
         return root
     }

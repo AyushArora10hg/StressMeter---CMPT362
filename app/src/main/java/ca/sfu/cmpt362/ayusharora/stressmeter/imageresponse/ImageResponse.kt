@@ -1,6 +1,5 @@
 package ca.sfu.cmpt362.ayusharora.stressmeter.imageresponse
 
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -20,7 +19,6 @@ class ImageResponse: AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         binding = ActivityImageResponseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
