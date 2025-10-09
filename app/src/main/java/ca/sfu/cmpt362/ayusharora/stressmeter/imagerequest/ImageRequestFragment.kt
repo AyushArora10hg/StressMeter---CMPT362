@@ -49,7 +49,6 @@ class ImageRequestFragment : Fragment() {
             imagesToShow = images
             imageAdapter.updateImages(images)
         }
-
         setupGridView()
         handleButtonClick()
 
@@ -81,19 +80,18 @@ class ImageRequestFragment : Fragment() {
         button.setOnClickListener {
             when (displayArrayNumber){
                 1->{
-                    imagesToShow =  images2
+                    imageRequestViewModel.currentImages.value = images2
                     displayArrayNumber = 2
                 }
                 2->{
-                    imagesToShow =  images3
+                    imageRequestViewModel.currentImages.value =  images3
                     displayArrayNumber = 3
                 }
                 3->{
-                    imagesToShow =  images1
+                    imageRequestViewModel.currentImages.value =  images1
                     displayArrayNumber = 1
                 }
             }
-            imageRequestViewModel.updateImages(imagesToShow)
         }
     }
 }
