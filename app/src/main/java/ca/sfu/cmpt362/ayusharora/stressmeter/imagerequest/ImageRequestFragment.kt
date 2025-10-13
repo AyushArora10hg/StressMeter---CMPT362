@@ -80,7 +80,6 @@ class ImageRequestFragment : Fragment() {
         gridView.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(requireActivity(), ImageResponse::class.java)
             intent.putExtra("selectedImage", imagesToShow[position])
-            intent.putExtra("selectedImageID",position)
             startActivity(intent)
         }
     }
@@ -110,6 +109,7 @@ class ImageRequestFragment : Fragment() {
                     displayArrayNumber = 1
                 }
             }
+            imageRequestViewModel.currentImages.value?.shuffle()
         }
     }
 }

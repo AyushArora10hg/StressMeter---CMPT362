@@ -52,7 +52,9 @@ class ImageResponse: AppCompatActivity() {
 
         val file = File(this.filesDir, "stress_level_data.csv")
         val timestamp = System.currentTimeMillis()
-        val stressLevel = intent.getIntExtra("selectedImageID",-1)
+        val stressLevel = resources.getResourceEntryName(
+            intent.getIntExtra("selectedImage", -1))
+            .split("_")[1]
         try {
             val writer = FileWriter(file,true)
             writer.write("$timestamp, $stressLevel\n")
