@@ -40,7 +40,8 @@ class ImageResponse: AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch{
                 writeToCSV()
             }
-            finishAffinity()
+            //TODO: Change to finishAffinity()
+            finish()
         }
 
         val cancelButton : Button = binding.imageResponseButtonCancel
