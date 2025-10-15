@@ -11,6 +11,9 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ImageResponse: AppCompatActivity() {
 
@@ -66,7 +69,7 @@ class ImageResponse: AppCompatActivity() {
     private fun writeToCSV(){
 
         val file = File(this.filesDir, "stress_level_data.csv")
-        val timestamp = System.currentTimeMillis()
+        val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
         val stressLevel = resources.getResourceEntryName(
             intent.getIntExtra("selectedImage", -1))
             .split("_")[1]

@@ -1,11 +1,13 @@
 package ca.sfu.cmpt362.ayusharora.stressmeter.imagerequest
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ca.sfu.cmpt362.ayusharora.stressmeter.R
@@ -39,6 +41,7 @@ class ImageRequestFragment : Fragment() {
     private lateinit var imageAdapter: ImageAdapter
     private lateinit var imagesToShow: IntArray
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         _binding = FragmentImageRequestBinding.inflate(inflater, container, false)
@@ -64,14 +67,17 @@ class ImageRequestFragment : Fragment() {
         _binding = null
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
         imageRequestViewModel.musicPlayer?.resume()
+        imageRequestViewModel.startVibration(requireContext())
     }
 
     override fun onPause() {
         super.onPause()
         imageRequestViewModel.musicPlayer?.pause()
+        imageRequestViewModel.stopVibration()
     }
     private fun setupGridView(){
 
@@ -86,11 +92,13 @@ class ImageRequestFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun loadMusic(){
         if (imageRequestViewModel.musicPlayer == null) {
             imageRequestViewModel.musicPlayer = MyMusicPlayer(requireContext(), R.raw.harry_potter_theme_1)
             imageRequestViewModel.musicPlayer?.start()
         }
+        imageRequestViewModel.startVibration(requireContext())
     }
     private fun handleButtonClick () {
 
