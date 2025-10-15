@@ -13,8 +13,11 @@ import java.io.FileWriter
 import java.io.IOException
 
 class ImageResponse: AppCompatActivity() {
+
+    // Binding given by default android studio code
     private lateinit var binding: ActivityImageResponseBinding
 
+    // Added my UI elements in the default method given by android studio
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -25,6 +28,7 @@ class ImageResponse: AppCompatActivity() {
         handleButtonClicks()
     }
 
+    // A helper method that displays the selected image (gets its name from intent.getIntExtra)
     private fun displayImage(){
 
         val imageView: ImageView = binding.imageResponseImageview
@@ -33,6 +37,10 @@ class ImageResponse: AppCompatActivity() {
             imageView.setImageResource(imageToShow)
         }
     }
+
+    // Button handler method
+    // Submit Button: writes the data (stress level and timestamp) to CSV and closes the app
+    // Cancel Button: returns to the previous activity (Image Response)
     private fun handleButtonClicks(){
 
         val submitButton: Button = binding.imageResponseButtonSubmit
@@ -49,6 +57,12 @@ class ImageResponse: AppCompatActivity() {
             finish()
         }
     }
+
+    // Use basic Java I/O operations to write to a CSV file.
+    // The writer writes a string formatted as (timestamp, stress level) to a new line in the file
+    // Timestamp: taken from System.currentTimeMillis()
+    // Stress Level: Extracted from the selected file name provided by the previous activity via intent
+    // (all my resource images are named as set#_$number, where $number is the stress level associated with that image)
     private fun writeToCSV(){
 
         val file = File(this.filesDir, "stress_level_data.csv")

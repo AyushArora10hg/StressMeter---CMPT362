@@ -13,6 +13,7 @@ import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentImageRequestBin
 import ca.sfu.cmpt362.ayusharora.stressmeter.imageresponse.ImageResponse
 class ImageRequestFragment : Fragment() {
 
+    // Resource images stored in int arrays
     private val images1 = intArrayOf(
         R.drawable.set1_0, R.drawable.set1_1, R.drawable.set1_2, R.drawable.set1_3,
         R.drawable.set1_4, R.drawable.set1_5, R.drawable.set1_6, R.drawable.set1_7,
@@ -31,6 +32,7 @@ class ImageRequestFragment : Fragment() {
         R.drawable.set3_8, R.drawable.set3_9, R.drawable.set3_10, R.drawable.set3_11,
         R.drawable.set3_12, R.drawable.set3_13, R.drawable.set3_14, R.drawable.set3_15
     )
+    // Binding class given by default android studio code
     private var _binding: FragmentImageRequestBinding? = null
     private val binding get() = _binding!!
     private lateinit var imageRequestViewModel: ImageRequestViewModel

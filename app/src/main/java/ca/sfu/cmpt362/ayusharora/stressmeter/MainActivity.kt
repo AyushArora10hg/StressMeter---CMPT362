@@ -13,6 +13,9 @@ import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    // This is the default code give by android studio upon creating a new navigation drawer activity.
+    // I did not add anything in this code, only removed couple of lines of extra code.
+
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
