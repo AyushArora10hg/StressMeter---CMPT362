@@ -1,5 +1,6 @@
 package ca.sfu.cmpt362.ayusharora.stressmeter.imageresponse
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -49,11 +50,8 @@ class ImageResponse: AppCompatActivity() {
 
         val submitButton: Button = binding.imageResponseButtonSubmit
         submitButton.setOnClickListener{
-            val file = File(this.filesDir, "stress_level_data.csv")
             val resourceFileName = resources.getResourceEntryName(intent.getIntExtra("selectedImage", -1))
-            CoroutineScope(Dispatchers.IO).launch{
-                imageResponseViewModel.writeToCSV(file, resourceFileName)
-            }
+            imageResponseViewModel.writeToCSV(this, resourceFileName)
             //TODO: Change to finishAffinity()
             finish()
         }
