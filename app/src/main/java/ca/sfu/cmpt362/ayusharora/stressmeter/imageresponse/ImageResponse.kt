@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.ActivityImageResponseBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,8 @@ class ImageResponse: AppCompatActivity() {
     // Binding given by default android studio code
     private lateinit var binding: ActivityImageResponseBinding
 
+    private lateinit var imageResponseViewModel: ImageResponseViewModel
+
     // Added my UI elements in the default method given by android studio
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -27,18 +30,16 @@ class ImageResponse: AppCompatActivity() {
         binding = ActivityImageResponseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        displayImage()
-        handleButtonClicks()
-    }
-
-    // A helper method that displays the selected image (gets its name from intent.getIntExtra)
-    private fun displayImage(){
-
-        val imageView: ImageView = binding.imageResponseImageview
-        val imageToShow = intent.getIntExtra("selectedImage", -1)
-        if (imageToShow != -1) {
-            imageView.setImageResource(imageToShow)
+        imageResponseViewModel = ViewModelProvider(this)[ImageResponseViewModel::class.java]
+        val selectedImage = intent.getIntExtra("selectedImage", -1)
+        if (selectedImage != -1){
+            imageResponseViewModel.selectedImage.value = selectedImage
         }
+        imageResponseViewModel.selectedImage.observe(this){selectedImage ->
+            binding.imageResponseImageview.setImageResource(selectedImage)
+        }
+
+        handleButtonClicks()
     }
 
     // Button handler method
@@ -48,8 +49,10 @@ class ImageResponse: AppCompatActivity() {
 
         val submitButton: Button = binding.imageResponseButtonSubmit
         submitButton.setOnClickListener{
+            val file = File(this.filesDir, "stress_level_data.csv")
+            val resourceFileName = resources.getResourceEntryName(intent.getIntExtra("selectedImage", -1))
             CoroutineScope(Dispatchers.IO).launch{
-                writeToCSV()
+                imageResponseViewModel.writeToCSV(file, resourceFileName)
             }
             //TODO: Change to finishAffinity()
             finish()
@@ -58,29 +61,6 @@ class ImageResponse: AppCompatActivity() {
         val cancelButton : Button = binding.imageResponseButtonCancel
         cancelButton.setOnClickListener {
             finish()
-        }
-    }
-
-    // Use basic Java I/O operations to write to a CSV file.
-    // The writer writes a string formatted as (timestamp, stress level) to a new line in the file
-    // Timestamp: taken from System.currentTimeMillis()
-    // Stress Level: Extracted from the selected file name provided by the previous activity via intent
-    // (all my resource images are named as set#_$number, where $number is the stress level associated with that image)
-    private fun writeToCSV(){
-
-        val file = File(this.filesDir, "stress_level_data.csv")
-        val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
-        val stressLevel = resources.getResourceEntryName(
-            intent.getIntExtra("selectedImage", -1))
-            .split("_")[1]
-        try {
-            val writer = FileWriter(file,true)
-            writer.write("$timestamp, $stressLevel\n")
-            writer.flush()
-            writer.close()
-
-        } catch (_: IOException){
-            println("File not found")
         }
     }
 }

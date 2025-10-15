@@ -9,16 +9,16 @@ import android.widget.ImageView
 // Learnt the logic of creating own adapter class from tutorial provided in the assignment description.
 // It takes an array of images and assigns it to a layout (eg. GridView)
 // It overrides the four basic functions of the BaseAdapter class
-class ImageAdapter(private val context: Context, private var images: IntArray) : BaseAdapter() {
+class ImageAdapter(private val context: Context, private var images: IntArray?) : BaseAdapter() {
 
     override fun getCount(): Int {
 
-        return images.size
+        return images?.size ?: 0
     }
 
     override fun getItem(position: Int): Any? {
 
-        return images[position]
+        return images?.get(position)
     }
 
     override fun getItemId(position: Int): Long {
@@ -31,7 +31,7 @@ class ImageAdapter(private val context: Context, private var images: IntArray) :
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
         val imageView: ImageView = convertView as? ImageView ?: ImageView(context)
-        imageView.setImageResource(images[position])
+        imageView.setImageResource(images?.get(position) ?: 0)
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
         val size = parent!!.width/4
         imageView.layoutParams = ViewGroup.LayoutParams(size, size)
@@ -40,7 +40,7 @@ class ImageAdapter(private val context: Context, private var images: IntArray) :
 
     // This helper method updates the value of the private images array yo newImages (provided by the
     // user class) to update the images displayed in the layout (eg. GridView)
-    fun updateImages(newImages: IntArray) {
+    fun updateImages(newImages: IntArray?) {
         images = newImages
         notifyDataSetChanged()
     }
