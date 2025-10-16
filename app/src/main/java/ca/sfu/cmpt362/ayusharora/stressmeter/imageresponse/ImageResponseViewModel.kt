@@ -25,6 +25,8 @@ class ImageResponseViewModel : ViewModel(){
     // (all my resource images are named as set#_$number, where $number is the stress level associated with that image)
     fun writeToCSV(context: Context, resourceFileName: String) {
         val file = File(context.filesDir, "stress_level_data.csv")
+
+        // Initially used System.currentTimeMillis(), but took help from chatGPT to format it properly
         val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
         val stressLevel = resourceFileName.split("_")[1]
         CoroutineScope(Dispatchers.IO).launch {

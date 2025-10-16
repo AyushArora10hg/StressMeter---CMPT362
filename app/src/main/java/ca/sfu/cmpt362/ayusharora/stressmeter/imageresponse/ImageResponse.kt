@@ -1,21 +1,10 @@
 package ca.sfu.cmpt362.ayusharora.stressmeter.imageresponse
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.ActivityImageResponseBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileWriter
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class ImageResponse: AppCompatActivity() {
 
@@ -52,8 +41,7 @@ class ImageResponse: AppCompatActivity() {
         submitButton.setOnClickListener{
             val resourceFileName = resources.getResourceEntryName(intent.getIntExtra("selectedImage", -1))
             imageResponseViewModel.writeToCSV(this, resourceFileName)
-            //TODO: Change to finishAffinity()
-            finish()
+            finishAffinity()
         }
 
         val cancelButton : Button = binding.imageResponseButtonCancel
