@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-
+        Util.checkPermissions(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
