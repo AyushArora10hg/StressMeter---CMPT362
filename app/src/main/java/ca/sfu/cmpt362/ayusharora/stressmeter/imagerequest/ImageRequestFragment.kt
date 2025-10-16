@@ -58,15 +58,15 @@ class ImageRequestFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
-        imageRequestViewModel.resumeMusic()
+        imageRequestViewModel.mediaPlayer?.start()
         imageRequestViewModel.startVibration(requireContext())
     }
 
     // Pauses the music and vibration when this fragment is paused
     override fun onPause() {
         super.onPause()
-        imageRequestViewModel.pauseMusic()
-        imageRequestViewModel.stopVibration()
+        imageRequestViewModel.mediaPlayer?.pause()
+        imageRequestViewModel.vibrator?.cancel()
     }
 
     // Helper method to setup images in a GridView
