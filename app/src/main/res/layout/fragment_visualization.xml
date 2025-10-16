@@ -22,24 +22,20 @@
             android:textAlignment="center"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/yapping"
+        <com.anychart.AnyChartView
+            android:id="@+id/visualization_graph"
+            android:layout_below="@+id/graph_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Assume\na\nGraph\n(at this very spot)"
-            android:layout_below="@+id/graph_text"
-            android:layout_marginTop="70dp"
-            android:layout_marginEnd="10dp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:textSize="20sp"/>
+            android:layout_margin="16dp"
+            />
 
         <TextView
             android:id="@+id/visualization_table_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/visualization_table_title"
-            android:layout_below="@+id/yapping"
+            android:layout_below="@+id/visualization_graph"
             android:layout_marginTop="70dp"
             android:layout_marginEnd="10dp"
             android:textStyle="bold"
