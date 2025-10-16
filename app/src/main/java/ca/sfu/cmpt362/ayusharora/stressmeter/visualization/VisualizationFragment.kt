@@ -1,7 +1,6 @@
 package ca.sfu.cmpt362.ayusharora.stressmeter.visualization
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +10,10 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import ca.sfu.cmpt362.ayusharora.stressmeter.R
 import ca.sfu.cmpt362.ayusharora.stressmeter.databinding.FragmentVisualizationBinding
 import com.anychart.AnyChart
-import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Cartesian
 import com.anychart.data.Set
@@ -30,25 +29,32 @@ class VisualizationFragment : Fragment() {
     private var _binding: FragmentVisualizationBinding? = null
     private val binding get() = _binding!!
 
-    // For storing graph data points
-    private val chartData = mutableListOf<DataEntry>()
+    private lateinit var visualizationViewModel: VisualizationViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentVisualizationBinding.inflate(inflater, container, false)
+        visualizationViewModel = ViewModelProvider(this)[VisualizationViewModel::class.java]
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            readFromCSV()
-            withContext(Dispatchers.Main) {
-                setupChart()
+        if (!visualizationViewModel.dataLoaded) {
+            CoroutineScope(Dispatchers.IO).launch {
+                readFromCSV()
+                withContext(Dispatchers.Main) {
+                    setupChart()
+                    visualizationViewModel.dataLoaded = true
+                }
+            }
+        } else {
+            setupChart()
+            for (row in visualizationViewModel.tableRows) {
+                addToTable(row.first, row.second)
             }
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -60,18 +66,17 @@ class VisualizationFragment : Fragment() {
         if (file.exists()){
             val lines = file.readLines()
             var instance = 0
-            val tableRows = mutableListOf<Pair<String, String>>()
             for (line in lines){
                 val parts = line.split(",")
                 val timestamp = parts[0].trim()
                 val stressLevel = parts[1].trim().toInt()
-                chartData.add(ValueDataEntry(instance, stressLevel))
-                tableRows.add(Pair(timestamp, stressLevel.toString()))
+                visualizationViewModel.chartData.add(ValueDataEntry(instance, stressLevel))
+                visualizationViewModel.tableRows.add(Pair(timestamp, stressLevel.toString()))
                 instance++
 
             }
             withContext(Dispatchers.Main) {
-                for (row in tableRows) {
+                for (row in visualizationViewModel.tableRows) {
                     addToTable(row.first, row.second)
                 }
             }
@@ -82,7 +87,7 @@ class VisualizationFragment : Fragment() {
 
         val cartesian: Cartesian = AnyChart.line()
         val dataSet = Set.instantiate()
-        dataSet.data(chartData)
+        dataSet.data(visualizationViewModel.chartData)
 
         val series = cartesian.line(dataSet.mapAs("{ x: 'x', value: 'value' }"))
         series.name("Stress Level")
