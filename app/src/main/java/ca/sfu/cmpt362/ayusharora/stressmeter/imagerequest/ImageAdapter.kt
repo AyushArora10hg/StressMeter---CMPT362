@@ -30,10 +30,10 @@ class ImageAdapter(private val context: Context, private var images: IntArray?) 
     // It sets the correct image from the images array and sizes it so that four images fit in one row.
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
-        val imageView: ImageView = convertView as? ImageView ?: ImageView(context)
+        val imageView = ImageView(context)
         imageView.setImageResource(images?.get(position) ?: 0)
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-        val size = parent!!.width/4
+        val size = parent!!.width / 4
         imageView.layoutParams = ViewGroup.LayoutParams(size, size)
         return imageView
     }
