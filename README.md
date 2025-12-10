@@ -2,6 +2,8 @@
 
 A mobile Android application for tracking and visualizing daily stress levels through an intuitive image-based interface.
 
+📥 Download APK: [*StressMeter.apk*](https://1drv.ms/u/c/931d74c7905f6350/IQDp3FYZruWEQ5Waz5sZm097AewZzfodI0sS90fvpqBPwbc?e=Ukpn0I)
+
 ## Overview
 
 StressMeter is a psychology-inspired mobile app that helps users monitor their stress levels over time. Instead of traditional surveys, it uses a visual approach where users select images that represent their current stress state. The app records these selections with timestamps and provides data visualization to help users reflect on their stress patterns.
